@@ -2,12 +2,13 @@ package com.moonspirit.leetcode;
 
 public class Template {
 
-	public static void main(String[] args) {
-		int[] testTable = { 0, 1, 2, 3, 4, 5, 6, 10, };
-		for (int ito : testTable) {
-			// test(ito);
-		}
-	}
+//	public static void main(String[] args) {
+//		int[] testTable = { 0, 1, 2, 3, 4, 5, 6, 10, };
+//		for (int ito : testTable) {
+//			ito++;
+//			test(ito);
+//		}
+//	}
 //		private static void test(int ito) {
 //			Solution solution = new Solution();
 //			int rtn;
