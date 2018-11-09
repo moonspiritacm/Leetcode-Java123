@@ -1,4 +1,4 @@
-package com.moonspirit.leetcode.p557;
+package com.moonspirit.leetcode.p43;
 
 import java.io.IOException;
 import java.nio.file.Paths;
