@@ -1,0 +1,12 @@
+abcdefg
+2
+hello
+2
+A man, a plan, a canal: Panama
+3
+123    22
+4
+The following features/epics are included in this release:
+100
+FAB-10120 - Identity Mixer for anonymous transactions Keep client identities anonymous and unlinkable through the use of zero-knowledge proofs.
+4

@@ -1,4 +1,4 @@
-package com.moonspirit.leetcode;
+package com.moonspirit.leetcode.p344;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Problem_344 {
 	public static void main(String[] args) throws IOException {
-		Scanner in = new Scanner(Paths.get("src/Problem_344.txt"), "UTF-8");
+		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p344/Problem_344.txt"), "UTF-8");
 		Solution solution = new Solution();
 
 		long begin = System.currentTimeMillis();
