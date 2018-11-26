@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * @ClassName      Problem640
  * @Description    [Leetcode 640](https://leetcode-cn.com/problems/solve-the-equation/description/) 字符串处理
- * @author         moonspirit*
+ * @author         *moonspirit*
  * @date           2018年11月25日 下午4:21:32
  * @version        1.0.0
  */
@@ -44,19 +44,19 @@ public class Problem640 {
 class Solution {
 	/**
 	 * @MethodName       solveEquation
-	 * @Description      字符串处理，遍历提取并计算系数，一趟扫描，复杂度 O(n)。
-	 * 					 1. (+/-)num(x) 为一个计算单元，检测到 x 或者不与 x 紧邻的数字即结束此单元
-	 *                   2. 多位数字的处理
-	 *                   3. 等号两边需要变号
+	 * @Description      字符串处理，遍历提取表达式系数，一趟扫描，时间复杂度 O(n)。
+	 * 					 1. (+/-)num(x) 为一个计算单元，检测到 x 或者不与 x 紧邻的数字判定结束
+	 *                   2. 多位数字的读取
+	 *                   3. 等号两边变号
 	 * @param 	         equation 待求解方程
 	 * @return           String 计算结果
 	 */
 	public String solveEquation(String equation) {
 		char[] array = equation.toCharArray();
-		int preX = 0; // x系数
-		int preNum = 0; // 常系数
-		int flag = 1; // 左右等式
-		int sign = 1; // 正负号
+		int preX = 0;
+		int preNum = 0;
+		int flag = 1;
+		int sign = 1;
 		int num = 1;
 
 		for (int i = 0; i < array.length; i++) {
@@ -107,7 +107,7 @@ class Solution {
 }
 
 /**
- * @ClassName      Solution
+ * @ClassName      SolutionExp
  * @Description    [Leetcode 640](https://leetcode-cn.com/problems/solve-the-equation/description/) 字符串处理——正则表达式
  * @author         moonspirit
  * @date           2018年11月25日 下午4:17:17
@@ -125,10 +125,14 @@ class SolutionExp {
 		int[] res2 = evaluateExpression(equation.split("=")[1]);
 		res[0] -= res2[0];
 		res[1] = res2[1] - res[1];
-		if (res[0] == 0 && res[1] == 0)
-			return "Infinite solutions";
-		if (res[0] == 0)
-			return "No solution";
+		if (res[0] == 0) {
+			if (res[1] == 0) {
+				return "Infinite solutions";
+			}
+			if (res[1] != 0) {
+				return "No solution";
+			}
+		}
 		return "x=" + res[1] / res[0];
 	}
 
