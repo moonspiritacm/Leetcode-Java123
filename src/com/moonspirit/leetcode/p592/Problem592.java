@@ -2,14 +2,14 @@ package com.moonspirit.leetcode.p592;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * @ClassName      Problem592
  * @Description    [Leetcode 592](https://leetcode-cn.com/problems/fraction-addition-and-subtraction/description/) 字符串处理+最小公倍数
- * @author         moonspirit
+ * @author         *moonspirit*
  * @date           2018年11月26日 下午4:50:12
  * @version        1.0.0
  */
@@ -44,13 +44,46 @@ public class Problem592 {
  * @version        1.0.0
  */
 class Solution {
+	/**
+	 * @MethodName       gcd
+	 * @Description      求两数的最大公约数，用于约分
+	 * @param            a
+	 * @param            b
+	 * @return           long 最大公约数
+	 */
+	public long gcd(long a, long b) {
+		while (b != 0) {
+			long r = a % b;
+			a = b;
+			b = r;
+		}
+		return a;
+	}
+
+	/**
+	 * @MethodName       lcm
+	 * @Description      求两数的最小公倍数，用于通分
+	 * @param            a
+	 * @param            b
+	 * @return           long 最小公倍数
+	 */
+	public long lcm(long a, long b) {
+		return a * b / gcd(a, b);
+	}
+
+	/**
+	 * @MethodName       fractionAddition
+	 * @Description      分式加减，时间复杂度 O(nlogn)。
+	 * @param            expression 待计算分式
+	 * @return           String 计算结果
+	 */
 	public String fractionAddition(String expression) {
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		char[] array = expression.toCharArray();
+		List<Integer> signList = new ArrayList<Integer>();
+		List<Integer> fenziList = new ArrayList<Integer>();
+		List<Integer> fenmuList = new ArrayList<Integer>();
 		int num = 0;
 		int sign = 1;
-		int fenmu = 0;
-		int fenzi = 0;
 		boolean flag = false;
 
 		for (int i = 0; i < array.length; i++) {
@@ -74,14 +107,29 @@ class Solution {
 			}
 
 			if (flag) {
-				if (map.containsKey(num)) {
-
-				}
+				fenmuList.add(num);
 			} else {
-				fenzi = sign * num;
+				fenziList.add(num);
+				signList.add(sign);
 			}
-
+			num = 0;
+			sign = 1;
+			flag = false;
 		}
-		return "";
+
+		long lcm = 1L;
+		for (int i = 0; i < fenmuList.size(); i++) {
+			if (fenziList.get(i) != 0) {
+				lcm = lcm(lcm, fenmuList.get(i));
+			}
+		}
+		long res = 0;
+		for (int i = 0; i < fenziList.size(); i++) {
+			if (fenziList.get(i) != 0) {
+				res += signList.get(i) * fenziList.get(i) * lcm / fenmuList.get(i);
+			}
+		}
+		long gcd = gcd(Math.abs(res), lcm);
+		return res / gcd + "/" + lcm / gcd;
 	}
 }
