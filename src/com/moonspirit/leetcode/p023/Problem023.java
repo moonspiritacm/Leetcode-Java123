@@ -105,3 +105,103 @@ class Solution {
 		return dummyRoot.next;
 	}
 }
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+
+class Solution {
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		if (l1 == null)
+			return l2;
+		if (l2 == null)
+			return l1;
+
+		if (l1.val <= l2.val) {
+			l1.next = mergeTwoLists(l1.next, l2);
+			return l1;
+		} else {
+			l2.next = mergeTwoLists(l1, l2.next);
+			return l2;
+		}
+	}
+
+	public ListNode mergeKLists(ListNode[] lists) {
+		if (lists == null || lists.length == 0)
+			return null;
+		if (lists.length == 1)
+			return lists[0];
+
+		int len = (lists.length + 1) / 2;
+		ListNode[] mergeLists = new ListNode[len];
+		for (int i = 0; i < lists.length / 2; i++) {
+			mergeLists[i] = mergeTwoLists(lists[2 * i], lists[2 * i + 1]);
+		}
+		if (lists.length % 2 != 0) {
+			mergeLists[len - 1] = lists[lists.length - 1];
+		}
+		mergeKLists(mergeLists);
+	}}
+
+Brute Force
+
+	class Solution {
+		public ListNode mergeKLists(ListNode[] lists) {
+			if (lists == null || lists.length == 0)
+				return null;
+
+			ListNode dummyRoot = new ListNode(0);
+			ListNode tail = dummyRoot;
+			int flag = -1;
+			while (true) {
+				int max = Integer.MAX_VALUE;
+				int maxPos = -1;
+				for (int i = 0; i < lists.length; i++) {
+					if (lists[i] != null && lists[i].val < max) {
+						max = lists[i].val;
+						maxPos = i;
+					}
+				}
+				if (maxPos == -1)
+					break;
+				if (flag != maxPos) {
+					tail.next = lists[maxPos];
+					flag = maxPos;
+				}
+				lists[maxPos] = lists[maxPos].next;
+				tail = tail.next;
+			}
+			return dummyRoot.next;
+		}
+	}
+
+	class Solution {
+		public ListNode mergeKLists(ListNode[] lists) {
+			if (lists == null || lists.length == 0)
+				return null;
+
+			ListNode dummyRoot = new ListNode(0);
+			ListNode tail = dummyRoot;
+			while (true) {
+				int max = Integer.MAX_VALUE;
+				int maxPos = -1;
+				for (int i = 0; i < lists.length; i++) {
+					if (lists[i] != null && lists[i].val < max) {
+						max = lists[i].val;
+						maxPos = i;
+					}
+				}
+				if (maxPos == -1)
+					break;
+				tail.next = lists[maxPos];
+				lists[maxPos] = lists[maxPos].next;
+				tail = tail.next;
+			}
+			return dummyRoot.next;
+		}
+}
