@@ -2,12 +2,14 @@ package com.moonspirit.leetcode.p021;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * @ClassName      Problem021
- * @Description    [Leetcode 021](https://leetcode.com/problems/merge-two-sorted-lists/) 链表
- * @author         moonspirit
+ * @Description    [Leetcode 021](https://leetcode.com/problems/merge-two-sorted-lists/) 数据结构——链表
+ * @author         moonspirit !@#$%
  * @date           2018年12月6日 上午11:30:51
  * @version        1.0.0
  */
@@ -15,10 +17,9 @@ public class Problem021 {
 	public static int[] stringToIntegerArray(String input) {
 		input = input.trim();
 		input = input.substring(1, input.length() - 1).trim();
-		if (input.length() == 0) {
+		if (input.length() == 0)
 			return new int[0];
-		}
-		Integer.MIN
+
 		String[] parts = input.split(",");
 		int[] output = new int[parts.length];
 		for (int i = 0; i < parts.length; i++) {
@@ -30,7 +31,6 @@ public class Problem021 {
 
 	public static ListNode stringToListNode(String input) {
 		int[] nodeValues = stringToIntegerArray(input);
-
 		ListNode dummyRoot = new ListNode(0);
 		ListNode ptr = dummyRoot;
 		for (int item : nodeValues) {
@@ -40,15 +40,24 @@ public class Problem021 {
 		return dummyRoot.next;
 	}
 
+	public static String listNodeToString(ListNode root) {
+		List<Integer> res = new ArrayList<>();
+		while (root != null) {
+			res.add(root.val);
+			root = root.next;
+		}
+		return res.toString();
+	}
+
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p021/Problem021.txt"), "UTF-8");
 		Solution solution = new Solution();
 
 		long begin = System.currentTimeMillis();
 		while (in.hasNextLine()) {
-			String str1 = in.nextLine();
-			String str2 = in.nextLine();
-			System.out.println(solution.mergeTwoLists(stringToListNode(str1), stringToListNode(str2)));
+			ListNode l1 = stringToListNode(in.nextLine());
+			ListNode l2 = stringToListNode(in.nextLine());
+			System.out.println(listNodeToString(solution.mergeTwoLists(l1, l2)));
 		}
 		long end = System.currentTimeMillis();
 		System.out.println("耗时：" + (end - begin) + "ms");
@@ -110,7 +119,7 @@ class Solution {
 
 /**
  * @ClassName      SolutionA1
- * @Description    改进迭代解法，引入标识变量减少 tail.next 的修改次数，时间复杂度 O(n)
+ * @Description    改进迭代解法，通过 flag 记录当前尾部所属原链表，减少 tail.next 修改次数，时间复杂度 O(n)
  * @author         moonspirit
  * @date           2018年12月6日 上午11:11:57
  * @version        1.0.0
@@ -152,13 +161,13 @@ class SolutionA1 {
 }
 
 /**
- * @ClassName      SolutionA2
+ * @ClassName      SolutionB
  * @Description    递归解法，时间复杂度 O(n)
  * @author         moonspirit
  * @date           2018年12月6日 上午11:10:47
  * @version        1.0.0
  */
-class SolutionA2 {
+class SolutionB {
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 		if (l1 == null)
 			return l2;
