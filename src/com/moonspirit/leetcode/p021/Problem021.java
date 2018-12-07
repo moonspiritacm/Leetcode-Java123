@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * @ClassName      Problem021
  * @Description    [Leetcode 021](https://leetcode.com/problems/merge-two-sorted-lists/) 数据结构——链表
- * @author         moonspirit !@#$%
+ * @author         moonspirit&
  * @date           2018年12月6日 上午11:30:51
  * @version        1.0.0
  */
@@ -134,7 +134,6 @@ class SolutionA1 {
 		ListNode dummyRoot = new ListNode(0);
 		ListNode tail = dummyRoot;
 		int flag = 0;
-
 		while (l1 != null && l2 != null) {
 			if (l1.val <= l2.val) {
 				if (flag != 1) {
