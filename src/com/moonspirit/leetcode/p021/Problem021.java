@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * @ClassName      Problem021
  * @Description    [Leetcode 021](https://leetcode.com/problems/merge-two-sorted-lists/) 数据结构——链表
- * @author         moonspirit&
+ * @author         moonspirit
  * @date           2018年12月6日 上午11:30:51
  * @version        1.0.0
  */
