@@ -124,7 +124,7 @@ class Solution {
 
 /**
  * @ClassName      SolutionA1
- * @Description    改进广度优先搜索，当前队列在内层循环结束后替换为新内容，故可以不进行出队直接遍历，时间复杂度 O(n)
+ * @Description    改进广度优先搜索，当前队列在内层循环结束后整体替换为新内容，在循环中将元素出队属于无效操作，时间复杂度 O(n)
  * @author         moonspirit
  * @date           2018年12月8日 下午6:02:34
  * @version        1.0.0
