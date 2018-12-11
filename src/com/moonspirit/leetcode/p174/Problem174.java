@@ -89,7 +89,7 @@ class Solution {
 
 /**
  * @ClassName      SolutionA1
- * @Description    动态规划，存储空间优化，当前状态仅与其右方（本轮循环）和下方（上轮循环）状态有关，时间复杂度 O(n^2)
+ * @Description    动态规划，存储空间优化，当前状态仅与右方（本轮循环）和下方（上轮循环）状态有关，时间复杂度 O(n^2)
  * @author         moonspirit
  * @date           2018年12月10日 下午10:15:17
  * @version        1.0.0
