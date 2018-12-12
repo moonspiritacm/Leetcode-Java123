@@ -30,9 +30,8 @@ public class Problem174 {
 	public static int[][] stringToInt2dArray(String input) {
 		input = input.trim();
 		input = input.substring(1, input.length() - 1).trim();
-		if (input.length() == 0) {
+		if (input.length() == 0)
 			return new int[0][0];
-		}
 
 		String[] parts = input.split("],");
 		int[][] output = new int[parts.length][];
@@ -61,7 +60,7 @@ public class Problem174 {
 
 /**
  * @ClassName      Solution
- * @Description    动态规划，dp[i][j] 表示从 (i, j) 位置移动到右下角需要的最少血量，时间复杂度 O(n^2)
+ * @Description    动态规划，dp[i][j] 表示从 (i, j) 移动到右下角需要的最少血量，时间复杂度 O(n^2)
  * @author         moonspirit
  * @date           2018年12月10日 下午9:53:30
  * @version        1.0.0
