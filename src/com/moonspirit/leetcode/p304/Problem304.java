@@ -30,9 +30,8 @@ public class Problem304 {
 	public static int[][] stringToInt2dArray(String input) {
 		input = input.trim();
 		input = input.substring(1, input.length() - 1).trim();
-		if (input.length() == 0) {
+		if (input.length() == 0)
 			return new int[0][0];
-		}
 
 		String[] parts = input.split("],");
 		int[][] output = new int[parts.length][];
