@@ -47,7 +47,7 @@ public class Problem303 {
 
 /**
  * @ClassName      NumArray
- * @Description    动态规划，dp[i] 表示前i个元素的和，即 nums[0] + nums[1] + nums[i-1]，特殊地，dp[0] = 0 用于处理边界情况，时间复杂度 O(n+m)
+ * @Description    动态规划，dp[i] 表示前i个元素之和，即 nums[0] + nums[1] + …… + nums[i-1]，特殊地，dp[0] = 0 用于处理边界情况，时间复杂度 O(n+m)
  * @author         moonspirit
  * @date           2018年12月11日 下午9:41:03
  * @version        1.0.0
