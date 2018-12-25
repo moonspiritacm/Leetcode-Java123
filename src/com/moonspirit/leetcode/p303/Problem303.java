@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * @ClassName      Problem303
- * @Description    [Leetcode 303](https://leetcode.com/problems/range-sum-query-immutable/) 动态规划
+ * @Description    [Leetcode 303](https://leetcode.com/problems/range-sum-query-immutable/) 一维动态规划
  * @author         moonspirit
  * @date           2018年12月11日 下午9:27:02
  * @version        1.0.0
@@ -20,10 +20,8 @@ public class Problem303 {
 
 		String[] parts = input.split(",");
 		int[] output = new int[parts.length];
-		for (int i = 0; i < parts.length; i++) {
-			String part = parts[i].trim();
-			output[i] = Integer.parseInt(part);
-		}
+		for (int i = 0; i < parts.length; i++)
+			output[i] = Integer.parseInt(parts[i].trim());
 		return output;
 	}
 
@@ -34,9 +32,7 @@ public class Problem303 {
 		String str = in.nextLine();
 		NumArray obj = new NumArray(stringToIntegerArray(str));
 		while (in.hasNextLine()) {
-			int i = in.nextInt();
-			int j = in.nextInt();
-			System.out.println(obj.sumRange(i, j));
+			System.out.println(obj.sumRange(in.nextInt(), in.nextInt()));
 		}
 		long end = System.currentTimeMillis();
 		System.out.println("耗时：" + (end - begin) + "ms");
@@ -46,25 +42,40 @@ public class Problem303 {
 }
 
 /**
- * @ClassName      NumArray
- * @Description    动态规划，dp[i] 表示前i个元素之和，即 nums[0] + nums[1] + …… + nums[i-1]，特殊地，dp[0] = 0 用于处理边界情况，时间复杂度 O(n+m)
+ * @ClassName      NumArrayC
+ * @Description    动态规划，dp[i] 表示前i个元素之和，即 nums[0] + nums[1] + …… + nums[i-1]；特殊地，dp[0] = 0 用于处理边界情况，时间复杂度 O(n+m)。
  * @author         moonspirit
  * @date           2018年12月11日 下午9:41:03
  * @version        1.0.0
  */
-class NumArray {
+class NumArrayC {
 	private int[] dp;
 
-	public NumArray(int[] nums) {
+	public NumArrayC(int[] nums) {
 		dp = new int[nums.length + 1];
-		for (int i = 1; i <= nums.length; i++) {
+		for (int i = 1; i <= nums.length; i++)
 			dp[i] = dp[i - 1] + nums[i - 1];
+	}
+
+	public int sumRange(int i, int j) {
+		return dp[j + 1] - dp[i];
+	}
+}
+
+class NumArray {
+	private int[][] sums;
+
+	public NumArray(int[] nums) {
+		sums = new int[nums.length][nums.length];
+		for (int i = 0; i < nums.length; i++) {
+			for (int j = i; j < nums.length; j++)
+				for (int p = i; p <= j; p++) {
+					sums[i][j] += nums[p];
+				}
 		}
 	}
 
 	public int sumRange(int i, int j) {
-		if (i > j)
-			return 0;
-		return dp[j + 1] - dp[i];
+		return sums[i][j];
 	}
 }
