@@ -2,5 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/cglib-3.2.10.jar" sourcepath="lib/cglib-3.2.10-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Workspace/Eclipse/Leetcode-Java/lib/cglib-3.2.10-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/cglib-3.2.10-sources.jar"/>
+	<classpathentry kind="lib" path="lib/asm-7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
