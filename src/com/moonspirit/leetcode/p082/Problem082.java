@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * @ClassName      Problem083
- * @Description    [Leetcode 083](https://leetcode.com/problems/remove-duplicates-from-sorted-list/) 数据结构——链表
+ * @ClassName      Problem082
+ * @Description    [Leetcode 082](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/) 数据结构——链表
  * @author         moonspirit
- * @date           2019年1月4日 上午12:44:06
+ * @date           2019年1月4日 上午10:25:37
  * @version        1.0.0
  */
-public class Problem083 {
+public class Problem082 {
 	public static int[] stringToIntegerArray(String input) {
 		input = input.trim();
 		input = input.substring(1, input.length() - 1).trim();
@@ -48,7 +48,7 @@ public class Problem083 {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p083/Problem083.txt"), "UTF-8");
+		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p082/Problem082.txt"), "UTF-8");
 		SolutionA solution = new SolutionA();
 
 		long begin = System.currentTimeMillis();
@@ -78,74 +78,56 @@ class ListNode {
 	}
 }
 
-/**
- * @ClassName      SolutionA
- * @Description    时间复杂度 O(n)
- * @author         moonspirit
- * @date           2019年1月4日 上午12:37:44
- * @version        1.0.0
- */
 class SolutionA {
 	public ListNode deleteDuplicates(ListNode head) {
+		if (head == null || head.next == null)
+			return head;
+
 		ListNode dummyRoot = new ListNode(0);
+		ListNode pre = dummyRoot;
+		ListNode cur = head;
+		boolean dup = false;
 		dummyRoot.next = head;
+		head = head.next;
 
 		while (head != null) {
-			if (head.next == null)
-				break;
-			if (head.next.val == head.val)
-				head.next = head.next.next;
-			else
-				head = head.next;
+			if (cur.val == head.val) {
+				dup = true;
+			} else {
+				if (dup) {
+					dup = false;
+					cur = head;
+				} else {
+					pre.next = cur;
+					pre = cur;
+					cur = head;
+				}
+			}
+			head = head.next;
 		}
+		if (!dup)
+			pre.next = cur;
+		else
+			pre.next = null;
 		return dummyRoot.next;
 	}
 }
 
-/**
- * @ClassName      SolutionB
- * @Description    递归，时间复杂度 O(n)
- * @author         moonspirit
- * @date           2019年1月4日 上午12:43:21
- * @version        1.0.0
- */
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
-        if(head == null || head.next == null)
-            return head;
-        ListNode dummyRoot = new ListNode(0);
-        ListNode pre = dummyRoot;
-        ListNode cur = head;
-        dummyRoot.next = head;
-        head = head.next;
-        boolean dup = false;
-        
-        while(head != null) {
-            if(cur.val == head.val) {
-                dup = true;
-                head = head.next;
-            }else{
-                if(dup){
-                    cur = head;
-                    head = head.next;
-                }else{
-                    pre.next = head;
-                    pre = cur;
-                    cur = head;
-                    head = head.next;
-                }
-                dup = false;
-            }
-        }
-        return dummyRoot.next;
-    }
-}
+class SolutionB {
+	public ListNode deleteDuplicates(ListNode head) {
+		ListNode dummyRoot = new ListNode(0);
+		ListNode pre = dummyRoot;
+		dummyRoot.next = head;
 
+		while (head != null) {
+			while (head.next != null && head.val == head.next.val)
+				head = head.next;
+			if (pre.next == head)
+				pre = pre.next;
+			else
+				pre.next = head.next;
+			head = head.next;
+		}
+		return dummyRoot.next;
+	}
+}

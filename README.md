@@ -21,6 +21,8 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 
 - [Leetcode 024. Swap Nodes in Pairs](src/com/moonspirit/leetcode/p024/Problem024.java)  数据结构——链表
 
+- [Leetcode 082. Remove Duplicates from Sorted List II](src/com/moonspirit/leetcode/p082/Problem082.java) 数据结构——链表
+
 - [Leetcode 083. Remove Duplicates from Sorted List](src/com/moonspirit/leetcode/p083/Problem083.java) 数据结构——链表
 
 - [Leetcode 203. Remove Linked List Elements](src/com/moonspirit/leetcode/p203/Problem203.java)  数据结构——链表
