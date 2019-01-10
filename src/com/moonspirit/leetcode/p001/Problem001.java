@@ -2,13 +2,13 @@ package com.moonspirit.leetcode.p001;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
  * @ClassName      Problem001
- * @Description    [Leetcode 001](https://leetcode.com/problems/two-sum/) 数据结构——映射
+ * @Description    [Leetcode 001](https://leetcode.com/problems/two-sum/) 数据结构——映射/哈希表
  * @author         moonspirit
  * @date           2019年1月10日 上午1:30:13
  * @version        1.0.0
@@ -56,7 +56,7 @@ public class Problem001 {
 
 /**
  * @ClassName      SolutionA
- * @Description    暴力求解，时间复杂度 O(n)。
+ * @Description    暴力求解，时间复杂度 O(n^2)。
  * @author         moonspirit
  * @date           2019年1月10日 上午1:04:58
  * @version        1.0.0

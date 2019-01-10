@@ -28,3 +28,12 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 - [Leetcode 203. Remove Linked List Elements](src/com/moonspirit/leetcode/p203/Problem203.java)  数据结构——链表
 
 
+
+
+
+
+- [Leetcode 001. Two Sum](src/com/moonspirit/leetcode/p001/Problem001.java) 数据结构——映射/哈希表
+
+- [Leetcode 002. Add Two Numbers](src/com/moonspirit/leetcode/p002/Problem002.java) 模拟加法
+
+
