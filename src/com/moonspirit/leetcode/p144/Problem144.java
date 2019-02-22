@@ -17,7 +17,6 @@ import java.util.Stack;
  * @version        1.0.0
  */
 public class Problem144 {
-
 	/**
 	 * @MethodName       stringToTreeNode
 	 * @Description      字符串转二叉树
@@ -85,7 +84,6 @@ public class Problem144 {
  * @version        1.0.0
  */
 class TreeNode {
-
 	int val;
 	TreeNode left;
 	TreeNode right;
@@ -103,7 +101,6 @@ class TreeNode {
  * @version        1.0.0
  */
 class SolutionA {
-
 	private List<Integer> res;
 
 	private void preOrder(TreeNode root) {
@@ -154,7 +151,7 @@ class SolutionB {
 
 /**
  * @ClassName      SolutionB1
- * @Description    迭代求解，先将右子节点入栈，再将左子节点入栈，不具备通用性，栈深度增加，效率降低，时间复杂度 O(n)
+ * @Description    迭代求解，先将右子节点入栈，再将左子节点入栈，仅限于前序遍历，栈深度增加，效率降低，时间复杂度 O(n)
  * @author         moonspirit
  * @date           2019年2月22日 下午4:03:28
  * @version        1.0.0
