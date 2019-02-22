@@ -1,4 +1,4 @@
-package com.moonspirit.leetcode.p144;
+package com.moonspirit.leetcode.p145;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -10,13 +10,13 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * @ClassName      Problem144
- * @Description    [Leetcode 144](https://leetcode.com/problems/binary-tree-preorder-traversal/) 二叉树——前序遍历
+ * @ClassName      Problem145
+ * @Description    [Leetcode 144](https://leetcode.com/problems/binary-tree-postorder-traversal/) 二叉树——后序遍历
  * @author         moonspirit
- * @date           2019年2月22日 下午3:23:00
+ * @date           2019年2月22日 下午5:49:36
  * @version        1.0.0
  */
-public class Problem144 {
+public class Problem145 {
 	/**
 	 * @MethodName       stringToTreeNode
 	 * @Description      字符串转二叉树
@@ -39,6 +39,7 @@ public class Problem144 {
 		while (!queue.isEmpty()) {
 			TreeNode node = queue.remove();
 
+			// 左子节点
 			if (i == parts.length)
 				break;
 			val = parts[i++].trim();
@@ -47,6 +48,7 @@ public class Problem144 {
 				queue.add(node.left);
 			}
 
+			// 右子节点
 			if (i == parts.length)
 				break;
 			val = parts[i++].trim();
@@ -59,13 +61,13 @@ public class Problem144 {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p144/Problem144.txt"), "UTF-8");
+		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p145/Problem145.txt"), "UTF-8");
 		SolutionA solution = new SolutionA();
 
 		long begin = System.currentTimeMillis();
 		while (in.hasNextLine()) {
 			String str = in.nextLine();
-			System.out.println(solution.preorderTraversal(stringToTreeNode(str)));
+			System.out.println(solution.postorderTraversal(stringToTreeNode(str)));
 		}
 		long end = System.currentTimeMillis();
 		System.out.println("耗时：" + (end - begin) + "ms");
@@ -93,80 +95,65 @@ class TreeNode {
 
 /**
  * @ClassName      SolutionA
- * @Description    递归求解，时间复杂度 O(n) = O(1) + O(p) + O(q)，其中 p + q + 1 = n
+ * @Description    递归求解，时间复杂度 O(n)
  * @author         moonspirit
- * @date           2019年2月22日 下午3:51:26
+ * @date           2019年2月22日 下午5:50:44
  * @version        1.0.0
  */
 class SolutionA {
-	private void preOrder(TreeNode root, List<Integer> res) {
+	private List<Integer> res;
+
+	private void postOrder(TreeNode root) {
 		if (root == null)
 			return;
+
+		postOrder(root.left);
+		postOrder(root.right);
 		res.add(root.val);
-		preOrder(root.left, res);
-		preOrder(root.right, res);
 	}
 
-	public List<Integer> preorderTraversal(TreeNode root) {
-		List<Integer> res = new ArrayList<>();
-		preOrder(root, res);
+	public List<Integer> postorderTraversal(TreeNode root) {
+		res = new ArrayList<>();
+		postOrder(root);
 		return res;
+
 	}
 }
 
 /**
- * @ClassName      SolutionB
- * @Description    迭代求解，迭代过程沿左侧链展开，先自上而下访问左侧链上的节点，再自下而上地遍历它们的右子树，时间复杂度 O(n)
+ * @ClassName      Solution
+ * @Description    后序遍历不同于先序和中序，它是要先处理完左右子树，然后再处理根(回溯)，所以需要一个记录哪些节点已经被访问的结构(可以在树结构里面加一个标记)，这里可以用map实现
  * @author         moonspirit
- * @date           2019年2月22日 下午4:20:27
+ * @date           2019年2月22日 下午6:09:42
  * @version        1.0.0
  */
-class SolutionB {
-	public List<Integer> preorderTraversal(TreeNode root) {
+/**
+ * @ClassName      Solution
+ * @Description    迭代求解，后序遍历是先处理右子树的前序遍历的逆输出，据此可以用栈存储逆后续遍历结果，依次出栈输出，时间复杂度 O(n)
+ * @author         moonspirit
+ * @date           2019年2月22日 下午6:17:00
+ * @version        1.0.0
+ */
+class Solution {
+	public List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<>();
 		if (root == null)
 			return res;
 
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		while (true) {
-			// 根节点不为空时，左侧链依次入栈
-			while (root != null) {
-				res.add(root.val);
+		Stack<TreeNode> stack = new Stack<>();
+		Stack<TreeNode> output = new Stack<>();
+		while (root != null || !stack.isEmpty()) {
+			if (root != null) {
+				output.push(root);
 				stack.push(root);
+				root = root.right;
+			} else {
+				root = stack.pop();
 				root = root.left;
 			}
-			// 根节点为空时，转向处理右子树
-			if (stack.isEmpty())
-				break;
-			root = stack.pop();
-			root = root.right;
 		}
-		return res;
-	}
-}
-
-/**
- * @ClassName      SolutionC
- * @Description    迭代求解，右子节点先入后出，左子节点后入先出，仅适用于前序遍历，栈深度增加，效率降低，时间复杂度 O(n)
- * @author         moonspirit
- * @date           2019年2月22日 下午4:03:28
- * @version        1.0.0
- */
-class SolutionC {
-	public List<Integer> preorderTraversal(TreeNode root) {
-		List<Integer> res = new ArrayList<>();
-		if (root == null)
-			return res;
-
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		stack.push(root);
-		while (!stack.isEmpty()) {
-			TreeNode node = stack.pop();
-			res.add(node.val);
-			if (node.right != null)
-				stack.push(node.right);
-			if (node.left != null)
-				stack.push(node.left);
+		while (!output.isEmpty()) {
+			res.add(output.pop().val);
 		}
 		return res;
 	}
