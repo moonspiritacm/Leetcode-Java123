@@ -154,7 +154,7 @@ class SolutionB {
 
 /**
  * @ClassName      SolutionB1
- * @Description    迭代求解，先将右子节点入栈，再将左子节点入栈，栈深度增加，效率降低，时间复杂度 O(n)
+ * @Description    迭代求解，先将右子节点入栈，再将左子节点入栈，不具备通用性，栈深度增加，效率降低，时间复杂度 O(n)
  * @author         moonspirit
  * @date           2019年2月22日 下午4:03:28
  * @version        1.0.0
