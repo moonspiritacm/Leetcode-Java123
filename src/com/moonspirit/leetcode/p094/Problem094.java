@@ -11,13 +11,12 @@ import java.util.Stack;
 
 /**
  * @ClassName      Problem094
- * @Description    [Leetcode 094](https://leetcode.com/problems/binary-tree-inorder-traversal/) 二叉树——前序遍历
+ * @Description    [Leetcode 094](https://leetcode.com/problems/binary-tree-inorder-traversal/) 二叉树——中序遍历
  * @author         moonspirit
  * @date           2019年2月22日 下午5:33:15
  * @version        1.0.0
  */
 public class Problem094 {
-
 	/**
 	 * @MethodName       stringToTreeNode
 	 * @Description      字符串转二叉树
@@ -85,7 +84,6 @@ public class Problem094 {
  * @version        1.0.0
  */
 class TreeNode {
-
 	int val;
 	TreeNode left;
 	TreeNode right;
@@ -103,7 +101,6 @@ class TreeNode {
  * @version        1.0.0
  */
 class SolutionA {
-
 	private List<Integer> res;
 
 	private void inOrder(TreeNode root) {
@@ -124,9 +121,6 @@ class SolutionA {
 /**
  * @ClassName      SolutionB
  * @Description    迭代求解，时间复杂度 O(n)
- * 				   - Print and push all left nodes into the stack till it hits NULL.
- * 				   - Pop the top element from the stack, and make the root point to its right.
- * 				   - Keep iterating till both the below conditions are met : Stack is empty and Root is NULL.
  * @author         moonspirit
  * @date           2019年2月22日 下午4:20:27
  * @version        1.0.0
