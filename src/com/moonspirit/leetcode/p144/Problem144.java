@@ -129,7 +129,7 @@ class SolutionB {
 
 		Stack<TreeNode> stack = new Stack<TreeNode>();
 		while (true) {
-			// 根节点不为空时，左侧链依次入栈
+			// 根节点不为空时，左侧分支依次入栈
 			while (root != null) {
 				res.add(root.val);
 				stack.push(root);

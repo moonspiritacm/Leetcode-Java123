@@ -127,16 +127,17 @@ class SolutionB {
 		if (root == null)
 			return res;
 
-		Stack<TreeNode> stack = new Stack<>();
-		while (root != null || !stack.isEmpty()) {
-			if (root != null) {
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		while (true) {
+			while (root != null) {
 				stack.push(root);
 				root = root.left;
-			} else {
-				root = stack.pop();
-				res.add(root.val);
-				root = root.right;
 			}
+			if (stack.isEmpty())
+				break;
+			root = stack.pop();
+			res.add(root.val);
+			root = root.right;
 		}
 		return res;
 	}
