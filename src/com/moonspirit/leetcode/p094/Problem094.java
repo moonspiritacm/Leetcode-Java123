@@ -60,7 +60,7 @@ public class Problem094 {
 
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p094/Problem094.txt"), "UTF-8");
-		SolutionA solution = new SolutionA();
+		SolutionB solution = new SolutionB();
 
 		long begin = System.currentTimeMillis();
 		while (in.hasNextLine()) {
@@ -129,10 +129,12 @@ class SolutionB {
 
 		Stack<TreeNode> stack = new Stack<TreeNode>();
 		while (true) {
+			// 根节点不为空时，左侧分支依次入栈
 			while (root != null) {
 				stack.push(root);
 				root = root.left;
 			}
+			// 根节点为空时，转向处理右子树
 			if (stack.isEmpty())
 				break;
 			root = stack.pop();
