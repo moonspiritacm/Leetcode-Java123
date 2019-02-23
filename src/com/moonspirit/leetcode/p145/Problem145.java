@@ -39,7 +39,6 @@ public class Problem145 {
 		while (!queue.isEmpty()) {
 			TreeNode node = queue.remove();
 
-			// 左子节点
 			if (i == parts.length)
 				break;
 			val = parts[i++].trim();
@@ -48,7 +47,6 @@ public class Problem145 {
 				queue.add(node.left);
 			}
 
-			// 右子节点
 			if (i == parts.length)
 				break;
 			val = parts[i++].trim();
@@ -95,65 +93,126 @@ class TreeNode {
 
 /**
  * @ClassName      SolutionA
- * @Description    递归求解，时间复杂度 O(n)
+ * @Description    递归求解，时间复杂度 O(n) = O(1) + O(p) + O(q)，其中 p + q + 1 = n
  * @author         moonspirit
  * @date           2019年2月22日 下午5:50:44
  * @version        1.0.0
  */
 class SolutionA {
-	private List<Integer> res;
-
-	private void postOrder(TreeNode root) {
+	private void postOrder(TreeNode root, List<Integer> res) {
 		if (root == null)
 			return;
-
-		postOrder(root.left);
-		postOrder(root.right);
+		postOrder(root.left, res);
+		postOrder(root.right, res);
 		res.add(root.val);
 	}
 
 	public List<Integer> postorderTraversal(TreeNode root) {
-		res = new ArrayList<>();
-		postOrder(root);
+		List<Integer> res = new ArrayList<>();
+		postOrder(root, res);
 		return res;
 
 	}
 }
 
 /**
- * @ClassName      Solution
- * @Description    后序遍历不同于先序和中序，它是要先处理完左右子树，然后再处理根(回溯)，所以需要一个记录哪些节点已经被访问的结构(可以在树结构里面加一个标记)，这里可以用map实现
- * @author         moonspirit
- * @date           2019年2月22日 下午6:09:42
- * @version        1.0.0
- */
-/**
- * @ClassName      Solution
- * @Description    迭代求解，后序遍历是先处理右子树的前序遍历的逆输出，据此可以用栈存储逆后续遍历结果，依次出栈输出，时间复杂度 O(n)
+ * @ClassName      SolutionB
+ * @Description    迭代求解，转化为逆后序遍历的逆序输出，逆后序遍历即先处理右子树再处理左子树的前序遍历过程，时间复杂度 O(n)
  * @author         moonspirit
  * @date           2019年2月22日 下午6:17:00
  * @version        1.0.0
  */
-class Solution {
+class SolutionB {
 	public List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> res = new ArrayList<>();
 		if (root == null)
 			return res;
 
 		Stack<TreeNode> stack = new Stack<>();
-		Stack<TreeNode> output = new Stack<>();
-		while (root != null || !stack.isEmpty()) {
-			if (root != null) {
-				output.push(root);
+		Stack<TreeNode> reverse = new Stack<>();
+		while (true) {
+			// 根节点不为空时，右侧分支依次入栈
+			while (root != null) {
 				stack.push(root);
+				reverse.push(root);
 				root = root.right;
-			} else {
-				root = stack.pop();
-				root = root.left;
 			}
+			// 根节点为空时，转向处理左子树
+			if (stack.isEmpty())
+				break;
+			root = stack.pop();
+			root = root.left;
 		}
-		while (!output.isEmpty()) {
-			res.add(output.pop().val);
+		while (!reverse.isEmpty()) {
+			res.add(reverse.pop().val);
+		}
+		return res;
+	}
+}
+
+/**
+ * @ClassName      SolutionB1
+ * @Description    迭代求解，转化为逆后序遍历的逆序输出，逆后序遍历即先处理右子树再处理左子树的前序遍历过程，时间复杂度 O(n)
+ * @author         moonspirit
+ * @date           2019年2月23日 上午10:42:31
+ * @version        1.0.0
+ */
+class SolutionB1 {
+	public List<Integer> postorderTraversal(TreeNode root) {
+		List<Integer> res = new ArrayList<>();
+		if (root == null)
+			return res;
+
+		Stack<TreeNode> stack = new Stack<>();
+		Stack<TreeNode> reverse = new Stack<>();
+		stack.push(root);
+		while (!stack.isEmpty()) {
+			root = stack.pop();
+			reverse.push(root);
+			if (root.left != null)
+				stack.push(root.left);
+			if (root.right != null)
+				stack.push(root.right);
+		}
+		while (!reverse.isEmpty()) {
+			res.add(reverse.pop().val);
+		}
+		return res;
+	}
+}
+
+/**
+ * @ClassName      SolutionC
+ * @Description    迭代求解，引入变量记录上次访问节点，右节点为空或已被访问则访问根节点，否则遍历右子树
+ * @author         moonspirit
+ * @date           2019年2月23日 下午12:02:13
+ * @version        1.0.0
+ */
+class SolutionC {
+	public List<Integer> postorderTraversal(TreeNode root) {
+		List<Integer> res = new ArrayList<>();
+		if (root == null)
+			return res;
+
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode pre = null;
+		while (root != null) {
+			stack.push(root);
+			root = root.left;
+		}
+		while (!stack.isEmpty()) {
+			root = stack.peek();
+			if (root.right == null || root.right == pre) { // 没有右子树或者右子树已访问时，访问根节点并出栈
+				res.add(root.val);
+				pre = root;
+				stack.pop();
+			} else { // 否则跳过根节点，遍历右子树
+				root = root.right;
+				while (root != null) {
+					stack.push(root);
+					root = root.left;
+				}
+			}
 		}
 		return res;
 	}
