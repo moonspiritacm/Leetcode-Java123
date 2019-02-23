@@ -39,7 +39,6 @@ public class Problem094 {
 		while (!queue.isEmpty()) {
 			TreeNode node = queue.remove();
 
-			// 左子节点
 			if (i == parts.length)
 				break;
 			val = parts[i++].trim();
@@ -48,7 +47,6 @@ public class Problem094 {
 				queue.add(node.left);
 			}
 
-			// 右子节点
 			if (i == parts.length)
 				break;
 			val = parts[i++].trim();
@@ -95,25 +93,23 @@ class TreeNode {
 
 /**
  * @ClassName      SolutionA
- * @Description    递归求解，时间复杂度 O(n)
+ * @Description    递归求解，时间复杂度 O(n) = O(1) + O(p) + O(q)，其中 p + q + 1 = n
  * @author         moonspirit
  * @date           2019年2月22日 下午3:51:26
  * @version        1.0.0
  */
 class SolutionA {
-	private List<Integer> res;
-
-	private void inOrder(TreeNode root) {
+	private void inOrder(TreeNode root, List<Integer> res) {
 		if (root == null)
 			return;
-		inOrder(root.left);
+		inOrder(root.left, res);
 		res.add(root.val);
-		inOrder(root.right);
+		inOrder(root.right, res);
 	}
 
 	public List<Integer> inorderTraversal(TreeNode root) {
-		res = new ArrayList<>();
-		inOrder(root);
+		List<Integer> res = new ArrayList<>();
+		inOrder(root, res);
 		return res;
 	}
 }

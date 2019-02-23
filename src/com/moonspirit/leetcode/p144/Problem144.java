@@ -116,7 +116,7 @@ class SolutionA {
 
 /**
  * @ClassName      SolutionB
- * @Description    迭代求解，迭代过程沿左侧链展开，先自上而下访问左侧链上的节点，再自下而上地遍历它们的右子树，时间复杂度 O(n)
+ * @Description    迭代求解，迭代过程沿左侧分支展开，先自上而下访问左侧分支上的节点，到达末端后转向，自下而上地遍历它们的右子树，时间复杂度 O(n)
  * @author         moonspirit
  * @date           2019年2月22日 下午4:20:27
  * @version        1.0.0
