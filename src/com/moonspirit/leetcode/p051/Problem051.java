@@ -8,25 +8,12 @@ import java.util.Scanner;
 
 /**
  * @ClassName      Problem051
- * @Description    [Leetcode 051](https://leetcode.com/problems/n-queens/) 递归搜索 回溯法
+ * @Description    [Leetcode 051](https://leetcode.com/problems/n-queens/) 搜索 回溯法
  * @author         moonspirit
  * @date           2019年1月9日 下午4:38:42
  * @version        1.0.0
  */
 public class Problem051 {
-	public static int[] stringToIntegerArray(String input) {
-		input = input.trim();
-		input = input.substring(1, input.length() - 1).trim();
-		if (input.length() == 0)
-			return new int[0];
-
-		String[] parts = input.split(",");
-		int[] output = new int[parts.length];
-		for (int i = 0; i < parts.length; i++)
-			output[i] = Integer.parseInt(parts[i].trim());
-		return output;
-	}
-
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p051/Problem051.txt"), "UTF-8");
 		SolutionA1 solution = new SolutionA1();
@@ -43,8 +30,8 @@ public class Problem051 {
 }
 
 /**
- * @ClassName      Solution
- * @Description    递归搜索，通过存储棋盘记录当前状态
+ * @ClassName      SolutionA
+ * @Description    递归搜索，通过二维棋盘记录当前状态
  * @author         moonspirit
  * @date           2019年1月9日 上午11:20:45
  * @version        1.0.0
@@ -199,13 +186,13 @@ class SolutionA {
 }
 
 /**
- * @ClassName      SolutionA1
- * @Description    递归搜索，通过存储行列、双对角线记录状态
+ * @ClassName      SolutionB
+ * @Description    递归搜索，通过行列、双对角线记录当前状态
  * @author         moonspirit
  * @date           2019年1月9日 下午4:27:16
  * @version        1.0.0
  */
-class SolutionA1 {
+class SolutionB {
 	private List<List<String>> _result;
 	private int[] _col;
 	private int[] _diag1;
@@ -262,6 +249,7 @@ class SolutionA1 {
 		_diag1 = new int[2 * n - 1];
 		_diag2 = new int[2 * n - 1];
 		_size = n;
+		Integer.MAX_VALUE
 		bt(0);
 		return _result;
 	}
