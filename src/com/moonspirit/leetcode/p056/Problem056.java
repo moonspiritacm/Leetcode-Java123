@@ -32,6 +32,8 @@ public class Problem056 {
 			return "[]";
 
 		StringBuilder sb = new StringBuilder();
+		char a;
+		Character.toLowerCase(ch)
 		for (int i = 0; i < input.length; i++)
 			sb.append(input[i]).append(", ");
 		return "[" + sb.substring(0, sb.length() - 2) + "]";
