@@ -57,4 +57,25 @@ public class Arrays {
 			output[i] = Integer.parseInt(parts[i].trim());
 		return output;
 	}
+
+	public static void qSort(int[] a, int low, int high) {
+		int l = low;
+		int h = high;
+		int key = a[low];
+
+		while (l < h) {
+			while (l < h && a[h] >= key)
+				h--;
+			a[l] = a[h];
+
+			while (l < h && a[l] <= key)
+				l++;
+			a[h] = a[l];
+		}
+		a[h] = key;
+		if (low < l)
+			qSort(a, low, l - 1);
+		if (h < high)
+			qSort(a, h + 1, high);
+	}
 }
