@@ -14,6 +14,34 @@ import java.util.Scanner;
  * @version        1.0.0
  */
 public class Problem056 {
+<<<<<<< HEAD
+	public static int[] stringToIntegerArray(String input) {
+		input = input.trim();
+		input = input.substring(1, input.length() - 1).trim();
+		if (input.length() == 0)
+			return new int[0];
+
+		String[] parts = input.split(",");
+		int[] output = new int[parts.length];
+		for (int i = 0; i < parts.length; i++)
+			output[i] = Integer.parseInt(parts[i].trim());
+		return output;
+	}
+
+	public static String integerArrayToString(int[] input) {
+		if (input.length == 0)
+			return "[]";
+
+		StringBuilder sb = new StringBuilder();
+		char a;
+		Character.toLowerCase(ch)
+		for (int i = 0; i < input.length; i++)
+			sb.append(input[i]).append(", ");
+		return "[" + sb.substring(0, sb.length() - 2) + "]";
+	}
+
+=======
+>>>>>>> refs/remotes/origin/dev
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p056/Problem056.txt"), "UTF-8");
 		// Solution solution = new Solution();
