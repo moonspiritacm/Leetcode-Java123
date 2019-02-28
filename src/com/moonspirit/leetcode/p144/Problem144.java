@@ -17,60 +17,30 @@ import java.util.Stack;
  * @version        1.0.0
  */
 public class Problem144 {
-	/**
-	 * @MethodName       stringToTreeNode
-	 * @Description      字符串转二叉树
-	 * @param            input 待处理字符串 [1,null,2,3]
-	 * @return           TreeNode 二叉树根节点
-	 */
-	public static TreeNode stringToTreeNode(String input) {
-		input = input.trim();
-		input = input.substring(1, input.length() - 1).trim();
-		if (input.length() == 0)
-			return null;
-
-		String[] parts = input.split(",");
-		String val = parts[0].trim();
-		TreeNode root = new TreeNode(Integer.parseInt(val));
-		Queue<TreeNode> queue = new LinkedList<>();
-		queue.add(root);
-
-		int i = 1;
-		while (!queue.isEmpty()) {
-			TreeNode node = queue.remove();
-
-			if (i == parts.length)
-				break;
-			val = parts[i++].trim();
-			if (!val.equals("null")) {
-				node.left = new TreeNode(Integer.parseInt(val));
-				queue.add(node.left);
-			}
-
-			if (i == parts.length)
-				break;
-			val = parts[i++].trim();
-			if (!val.equals("null")) {
-				node.right = new TreeNode(Integer.parseInt(val));
-				queue.add(node.right);
-			}
-		}
-		return root;
-	}
 
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p144/Problem144.txt"), "UTF-8");
-		SolutionA solution = new SolutionA();
+		// Solution solution = new Solution();
 
 		long begin = System.currentTimeMillis();
-		while (in.hasNextLine()) {
-			String str = in.nextLine();
-			System.out.println(solution.preorderTraversal(stringToTreeNode(str)));
-		}
+		/*
+		 * while (in.hasNextLine()) { String str = in.nextLine();
+		 * System.out.println(solution.preorderTraversal(stringToTreeNode(str))); }
+		 */
 		long end = System.currentTimeMillis();
 		System.out.println("耗时：" + (end - begin) + "ms");
 
 		in.close();
+	}
+}
+
+class TreeNode {
+	int val;
+	TreeNode left;
+	TreeNode right;
+
+	public TreeNode(int x) {
+		val = x;
 	}
 }
 

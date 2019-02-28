@@ -1,9 +1,54 @@
 package com.moonspirit.leetcode.utils;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
+import com.moonspirit.leetcode.p144.TreeNode;
 
 public class Arrays {
+	/**
+	 * @MethodName       stringToTreeNode
+	 * @Description      字符串转二叉树
+	 * @param            input 待处理字符串 [1,null,2,3]
+	 * @return           TreeNode 二叉树根节点
+	 */
+	public static TreeNode stringToTreeNode(String input) {
+		input = input.trim();
+		input = input.substring(1, input.length() - 1).trim();
+		if (input.length() == 0)
+			return null;
+
+		String[] parts = input.split(",");
+		String val = parts[0].trim();
+		TreeNode root = new TreeNode(Integer.parseInt(val));
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.add(root);
+
+		int i = 1;
+		while (!queue.isEmpty()) {
+			TreeNode node = queue.remove();
+
+			if (i == parts.length)
+				break;
+			val = parts[i++].trim();
+			if (!val.equals("null")) {
+				node.left = new TreeNode(Integer.parseInt(val));
+				queue.add(node.left);
+			}
+
+			if (i == parts.length)
+				break;
+			val = parts[i++].trim();
+			if (!val.equals("null")) {
+				node.right = new TreeNode(Integer.parseInt(val));
+				queue.add(node.right);
+			}
+		}
+		return root;
+	}
+
 	public static List<String> stringToStringList(String input) {
 		List<String> output = new ArrayList<>();
 		input = input.trim();
