@@ -1,19 +1,19 @@
-package com.moonspirit.leetcode.p061;
+package com.moonspirit.leetcode.p092;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
- * @ClassName      Problem061
- * @Description    [Leetcode 061](https://leetcode.com/problems/rotate-list/) 链表
+ * @ClassName      Problem092
+ * @Description    [Leetcode 092](https://leetcode.com/problems/reverse-linked-list-ii/) 链表
  * @author         moonspirit
  * @date           2019年2月28日 下午10:00:57
  * @version        1.0.0
  */
-public class Problem061 {
+public class Problem092 {
 	public static void main(String[] args) throws IOException {
-		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p061/Problem061.txt"), "UTF-8");
+		Scanner in = new Scanner(Paths.get("src/com/moonspirit/leetcode/p092/Problem092.txt"), "UTF-8");
 		// Solution solution = new Solution();
 
 		long begin = System.currentTimeMillis();
@@ -39,25 +39,31 @@ class ListNode {
 }
 
 class Solution {
-	public ListNode rotateRight(ListNode head, int k) {
+	public ListNode reverseBetween(ListNode head, int m, int n) {
 		if (head == null || head.next == null)
 			return head;
 
-		int n = 1;
+		int i = 1;
+		ListNode dummyRoot = new ListNode(-1);
+		dummyRoot.next = head;
+		ListNode pre = dummyRoot;
 		ListNode curr = head;
-		while (curr.next != null) {
-			n++;
+		while (i < m) {
+			i++;
+			pre = curr;
 			curr = curr.next;
 		}
-
-		curr.next = head;
-		curr = head;
-		int i = n - k % n - 1;
-		while (i-- > 0) {
-			curr = curr.next;
+		ListNode start = pre;
+		ListNode end = curr;
+		while (i <= n) {
+			i++;
+			ListNode tmp = curr.next;
+			curr.next = pre;
+			pre = curr;
+			curr = tmp;
 		}
-		head = curr.next;
-		curr.next = null;
-		return head;
+		start.next = pre;
+		end.next = curr;
+		return dummyRoot.next;
 	}
 }
