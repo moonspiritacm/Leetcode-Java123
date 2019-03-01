@@ -53,8 +53,7 @@ class Solution {
 		curr.next = head;
 		curr = head;
 		int i = n - k % n - 1;
-		while (i > 0) {
-			i--;
+		while (i-- > 0) {
 			curr = curr.next;
 		}
 		head = curr.next;
