@@ -43,9 +43,10 @@ class SolutionA {
 
 		if (m == 1)
 			return uniquePaths(m, n - 1);
-		if (n == 1)
+		else if (n == 1)
 			return uniquePaths(m - 1, n);
-		return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+		else
+			return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
 	}
 }
 
