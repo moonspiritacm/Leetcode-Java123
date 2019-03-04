@@ -52,7 +52,7 @@ class SolutionA {
 
 /**
  * @ClassName      SolutionB
- * @Description    记忆化递归，时间复杂度 O(n^2)
+ * @Description    记忆化递归，时间复杂度 O(mn)
  * @author         moonspirit
  * @date           2019年3月5日 上午12:12:55
  * @version        1.0.0
@@ -83,7 +83,7 @@ class SolutionB {
 
 /**
  * @ClassName      SolutionC
- * @Description    二维动态规划，时间复杂度 O(n^2)
+ * @Description    二维动态规划，时间复杂度 O(mn)
  * @author         moonspirit
  * @date           2019年3月5日 上午12:14:31
  * @version        1.0.0
