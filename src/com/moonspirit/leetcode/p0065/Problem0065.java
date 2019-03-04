@@ -69,7 +69,6 @@ class Solution {
 		}
 		while (i < chs.length && chs[i] == ' ')
 			i++;
-
 		return digit && i == chs.length;
 	}
 }
