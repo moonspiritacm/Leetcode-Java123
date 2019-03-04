@@ -29,6 +29,13 @@ public class Problem0062 {
 	}
 }
 
+/**
+ * @ClassName      SolutionA
+ * @Description    普通递归，重复求解子问题，时间复杂度 O(2^n)
+ * @author         moonspirit
+ * @date           2019年3月5日 上午12:11:14
+ * @version        1.0.0
+ */
 class SolutionA {
 	public int uniquePaths(int m, int n) {
 		if (m == 1 && n == 1)
@@ -42,13 +49,50 @@ class SolutionA {
 	}
 }
 
+/**
+ * @ClassName      SolutionB
+ * @Description    记忆化递归，时间复杂度 O(n^2)
+ * @author         moonspirit
+ * @date           2019年3月5日 上午12:12:55
+ * @version        1.0.0
+ */
 class SolutionB {
+	private int[][] dp;
+
+	private int helper(int m, int n) {
+		if (m == 1 && n == 1)
+			return 1;
+		if (dp[m][n] != 0)
+			return dp[m][n];
+
+		if (m == 1)
+			dp[m][n] = helper(m, n - 1);
+		else if (n == 1)
+			dp[m][n] = helper(m - 1, n);
+		else
+			dp[m][n] = helper(m, n - 1) + helper(m - 1, n);
+		return dp[m][n];
+	}
+
+	public int uniquePaths(int m, int n) {
+		dp = new int[m + 1][n + 1];
+		return helper(m, n);
+	}
+}
+
+/**
+ * @ClassName      SolutionC
+ * @Description    二维动态规划，时间复杂度 O(n^2)
+ * @author         moonspirit
+ * @date           2019年3月5日 上午12:14:31
+ * @version        1.0.0
+ */
+class SolutionC {
 	public int uniquePaths(int m, int n) {
 		int[][] dp = new int[m][n];
 		dp[0][0] = 1;
-		for (int j = 1; j < n; j++) {
+		for (int j = 1; j < n; j++)
 			dp[0][j] = 1;
-		}
 		for (int i = 1; i < m; i++) {
 			dp[i][0] = 1;
 			for (int j = 1; j < n; j++) {
@@ -56,5 +100,28 @@ class SolutionB {
 			}
 		}
 		return dp[m - 1][n - 1];
+	}
+}
+
+/**
+ * @ClassName      SolutionD
+ * @Description    二维动态规划，滚动数组优化空间复杂度
+ * @author         moonspirit
+ * @date           2019年3月5日 上午12:15:27
+ * @version        1.0.0
+ */
+class SolutionD {
+	public int uniquePaths(int m, int n) {
+		int[] dp = new int[n];
+		dp[0] = 1;
+		for (int j = 1; j < n; j++)
+			dp[j] = 1;
+		for (int i = 1; i < m; i++) {
+			dp[0] = 1;
+			for (int j = 1; j < n; j++) {
+				dp[j] = dp[j] + dp[j - 1];
+			}
+		}
+		return dp[n - 1];
 	}
 }
