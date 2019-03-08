@@ -41,3 +41,5 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 1. [Leetcode 0464](https://leetcode.com/problems/can-i-win/) 记忆化递归 状态压缩 博弈论
 
 2. [Leetcode 0111](https://leetcode.com/problems/minimum-depth-of-binary-tree/) 二叉树
+
+3. [Leetcode 0104](https://leetcode.com/problems/maximum-depth-of-binary-tree/) 二叉树
