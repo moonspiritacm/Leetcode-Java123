@@ -2,6 +2,8 @@ package com.moonspirit.leetcode.p0111;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -39,7 +41,7 @@ class TreeNode {
 	}
 }
 
-class Solution {
+class SolutionA {
 	public int minDepth(TreeNode root) {
 		if (root == null)
 			return 0;
@@ -52,5 +54,33 @@ class Solution {
 			return left + 1;
 		else
 			return (left < right) ? left + 1 : right + 1;
+	}
+}
+
+class SolutionB {
+	public int minDepth(TreeNode root) {
+		if (root == null)
+			return 0;
+
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.add(root);
+		int count = 1;
+		int depth = 0;
+		while (!queue.isEmpty()) {
+			TreeNode node = queue.remove();
+			count--;
+			if (node.left != null)
+				queue.add(node.left);
+			if (node.right != null)
+				queue.add(node.right);
+			if (node.left == null && node.right == null)
+				return depth + 1;
+
+			if (count == 0) {
+				depth++;
+				count = queue.size();
+			}
+		}
+		return depth;
 	}
 }
