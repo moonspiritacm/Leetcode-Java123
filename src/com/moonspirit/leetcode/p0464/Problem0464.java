@@ -31,12 +31,13 @@ public class Problem0464 {
 
 /**
  * @ClassName      Solution
- * @Description    排列数 O(n!)，组合数 O(2^n)，游戏中选择的先后顺序不影响游戏结果，将排列数转化为组合数，压缩状态空间。
- *                  2^n 个子问题，求解每个子问题的时间复杂度 O(n)，总的时间复杂度 O(n2^n)。
- *                  1. 记忆化递归
- *                  2. 使用一个字节存储结果 0、+1、-1
- *                  3. 使用一个整型存储序列（二进制）
- *                  4. 如果下一个状态有一个是必败的，那么当前状态就是必胜的
+ * @Description    1. 压缩状态空间：二人先后在 [1, 2, ……, M] 范围内选数，所有可能为 M！种，即排列数。
+ *                                      实际上，序列的顺序不影响胜负结果，考虑在给定序列 S 的基础上开始游戏，S 具体是按照什么顺序选择而形成的无关紧要。
+ *                                      因此，将排列数转化为组合数，即所有可能的状态为 2^M 种。
+ *                 2. 划分子问题：在特定序列 S 的基础上开始游戏，先手能否赢得比赛。子问题个数 2^M，求解每个子问题的时间复杂度 O(M)，总的时间复杂度 O(M * 2^M)。
+ *                 3. 记忆化递归，子问题不再重复求解。
+ *                 4. 存储空间优化：使用一个 32 位整数存储当前序列，使用一个字节存储结果（0、-1、+1）。
+ *                 5. 博弈策略：下一状态全胜时，当前状态必败；只要下一状态有失败情况，那么当前状态必胜（选择下一状态对手失败的情况）。
  * @author         moonspirit
  * @date           2019年3月8日 上午10:27:02
  * @version        1.0.0
@@ -44,18 +45,18 @@ public class Problem0464 {
 class Solution {
 	private byte[] dp;
 
-	private boolean helper(int maxChoosableInteger, int desiredTotal, int seq) {
-		if (desiredTotal <= 0)
+	private boolean helper(int M, int T, int seq) {
+		if (T <= 0)
 			return false;
 		if (dp[seq] == 1)
 			return true;
 		if (dp[seq] == -1)
 			return false;
 
-		for (int i = 0; i < maxChoosableInteger; i++) {
-			if ((seq & (1 << i)) > 0)
+		for (int i = 0; i < M; i++) {
+			if ((seq & (1 << i)) != 0)
 				continue;
-			if (!helper(maxChoosableInteger, desiredTotal - i - 1, seq | (1 << i))) {
+			if (!helper(M, T - i - 1, seq | (1 << i))) {
 				dp[seq] = 1;
 				return true;
 			}
@@ -70,7 +71,7 @@ class Solution {
 		if ((1 + maxChoosableInteger) * maxChoosableInteger / 2 < desiredTotal)
 			return false;
 
-		dp = new byte[1 << maxChoosableInteger]; // 2^M 种状态
+		dp = new byte[1 << maxChoosableInteger];
 		return helper(maxChoosableInteger, desiredTotal, 0);
 	}
 }
