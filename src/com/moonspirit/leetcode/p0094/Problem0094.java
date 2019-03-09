@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * @ClassName      Problem0094
@@ -57,6 +58,28 @@ class SolutionA {
 
 		List<Integer> res = new ArrayList<>();
 		inOrder(root, res);
+		return res;
+	}
+}
+
+class SolutionB {
+	public List<Integer> inorderTraversal(TreeNode root) {
+		if (root == null)
+			return new ArrayList<>();
+
+		List<Integer> res = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
+		while (true) {
+			while (root != null) {
+				stack.push(root);
+				root = root.left;
+			}
+			if (stack.isEmpty())
+				break;
+			root = stack.pop();
+			res.add(root.val);
+			root = root.right;
+		}
 		return res;
 	}
 }
