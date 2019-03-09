@@ -121,3 +121,27 @@ class SolutionC {
 		return res;
 	}
 }
+
+class SolutionD {
+	private void levelOrder(TreeNode root, int level, List<List<Integer>> res) {
+		if (root == null)
+			return;
+
+		if (res.size() == level)
+			res.add(new ArrayList<>());
+		res.get(level).add(root.val);
+		if (root.left != null)
+			levelOrder(root.left, level + 1, res);
+		if (root.right != null)
+			levelOrder(root.right, level + 1, res);
+	}
+
+	public List<List<Integer>> levelOrder(TreeNode root) {
+		if (root == null)
+			return new ArrayList<>();
+
+		List<List<Integer>> res = new ArrayList<>();
+		levelOrder(root, 0, res);
+		return res;
+	}
+}
