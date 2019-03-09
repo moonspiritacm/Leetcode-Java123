@@ -95,3 +95,29 @@ class SolutionB {
 		return res;
 	}
 }
+
+class SolutionC {
+	public List<List<Integer>> levelOrder(TreeNode root) {
+		if (root == null)
+			return new ArrayList<>();
+
+		List<List<Integer>> res = new ArrayList<>();
+		Queue<TreeNode> curr = new LinkedList<>();
+		curr.add(root);
+		while (!curr.isEmpty()) {
+			Queue<TreeNode> next = new LinkedList<>();
+			List<Integer> ans = new ArrayList<>();
+			while (!curr.isEmpty()) {
+				TreeNode node = curr.remove();
+				ans.add(node.val);
+				if (node.left != null)
+					next.add(node.left);
+				if (node.right != null)
+					next.add(node.right);
+			}
+			res.add(ans);
+			curr = next;
+		}
+		return res;
+	}
+}
