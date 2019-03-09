@@ -47,14 +47,14 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 
 
 
-1. [Leetcode 0102](https://leetcode.com/problems/binary-tree-level-order-traversal/) 二叉树
+1. [Leetcode 0102](https://leetcode.com/problems/binary-tree-level-order-traversal/) 二叉树——层序遍历
 
-2. [Leetcode 0107](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/) 二叉树
+2. [Leetcode 0107](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/) 二叉树——自底向上的层序遍历
 
-3. [Leetcode 0429](https://leetcode.com/problems/n-ary-tree-level-order-traversal/) N叉树
+3. [Leetcode 0429](https://leetcode.com/problems/n-ary-tree-level-order-traversal/) N叉树——层序遍历
 
-4. [Leetcode 0144](https://leetcode.com/problems/binary-tree-preorder-traversal/) 二叉树
+4. [Leetcode 0144](https://leetcode.com/problems/binary-tree-preorder-traversal/) 二叉树——前序遍历
 
-5. [Leetcode 0094](https://leetcode.com/problems/binary-tree-inorder-traversal/) 二叉树
+5. [Leetcode 0094](https://leetcode.com/problems/binary-tree-inorder-traversal/) 二叉树——中序遍历
 
-6. [Leetcode 0145](https://leetcode.com/problems/binary-tree-postorder-traversal/) 二叉树
+6. [Leetcode 0145](https://leetcode.com/problems/binary-tree-postorder-traversal/) 二叉树——后续遍历
