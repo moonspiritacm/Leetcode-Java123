@@ -50,3 +50,5 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 1. [Leetcode 0102](https://leetcode.com/problems/binary-tree-level-order-traversal/) 二叉树
 
 2. [Leetcode 0107](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/) 二叉树
+
+3. [Leetcode 0429](https://leetcode.com/problems/n-ary-tree-level-order-traversal/) N叉树
