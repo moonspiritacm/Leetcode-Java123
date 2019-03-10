@@ -51,7 +51,7 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 
 2. [Leetcode 0107](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/) 二叉树——自底向上的层序遍历
 
-3. [Leetcode 0429](https://leetcode.com/problems/n-ary-tree-level-order-traversal/) N叉树——层序遍历
+3. [Leetcode 0429](https://leetcode.com/problems/n-ary-tree-level-order-traversal/) 多叉树——层序遍历
 
 4. [Leetcode 0144](https://leetcode.com/problems/binary-tree-preorder-traversal/) 二叉树——前序遍历
 
