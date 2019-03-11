@@ -62,3 +62,10 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 7. [Leetcode 0509](https://leetcode.com/problems/n-ary-tree-preorder-traversal/) 多叉树——前序遍历
 
 8. [Leetcode 0590](https://leetcode.com/problems/n-ary-tree-postorder-traversal/) 多叉树——后序遍历
+
+
+
+
+
+
+[Leetcode 0263](https://leetcode.com/problems/ugly-number/) 丑数
