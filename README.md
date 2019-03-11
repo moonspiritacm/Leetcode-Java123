@@ -69,3 +69,4 @@ Programming and algorithm exercises using Java 8 in Leetcode.
 
 
 [Leetcode 0263](https://leetcode.com/problems/ugly-number/) 丑数
+[Leetcode 0264](https://leetcode.com/problems/ugly-number-ii/) 丑数 动态规划
