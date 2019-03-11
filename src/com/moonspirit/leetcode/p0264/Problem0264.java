@@ -79,21 +79,24 @@ class SolutionB {
 		if (n <= 0)
 			return 0;
 
+		int[] primes = { 2, 3, 5 };
 		int[] ids = new int[3];
 		int[] uglys = new int[n];
 		uglys[0] = 1;
 		for (int i = 1; i < n; i++) {
-			int a = uglys[ids[0]] * 2;
-			int b = uglys[ids[1]] * 3;
-			int c = uglys[ids[2]] * 5;
-			int min = Math.min(a, Math.min(b, c));
+			int min = Integer.MAX_VALUE;
+			int pos = -1;
+			for (int j = 0; j < 3; j++) {
+				int tmp = uglys[ids[j]] * primes[j];
+				if (tmp < min) {
+					min = tmp;
+					pos = j;
+				} else if (tmp == min) {
+					ids[j]++;
+				}
+			}
 			uglys[i] = min;
-			if (min == a)
-				ids[0]++;
-			if (min == b)
-				ids[1]++;
-			if (min == c)
-				ids[2]++;
+			ids[pos]++;
 		}
 		return uglys[n - 1];
 	}
