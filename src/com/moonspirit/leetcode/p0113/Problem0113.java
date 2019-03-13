@@ -63,7 +63,6 @@ class Solution {
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
 		if (root == null)
 			return new ArrayList<>();
-
 		helper(root, sum);
 		return res;
 	}
