@@ -45,9 +45,10 @@ class Solution {
 	private List<List<Integer>> res = new ArrayList<>();
 	private List<Integer> ans = new ArrayList<>();
 
-	private void helper(TreeNode root, int sum) {
+	private void dfs(TreeNode root, int sum) {
 		if (root == null)
 			return;
+
 		if (root.val == sum && root.left == null && root.right == null) {
 			ans.add(root.val);
 			res.add(new ArrayList<>(ans));
@@ -55,15 +56,16 @@ class Solution {
 			return;
 		}
 		ans.add(root.val);
-		helper(root.left, sum - root.val);
-		helper(root.right, sum - root.val);
+		dfs(root.left, sum - root.val);
+		dfs(root.right, sum - root.val);
 		ans.remove(ans.size() - 1);
 	}
 
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
 		if (root == null)
 			return new ArrayList<>();
-		helper(root, sum);
+
+		dfs(root, sum);
 		return res;
 	}
 }
