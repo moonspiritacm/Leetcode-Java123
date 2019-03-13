@@ -37,16 +37,16 @@ public class Problem0064 {
  * @version        1.0.0
  */
 class SolutionA {
-	private int helper(int[][] grid, int m, int n) {
-		if (m == 1 && n == 1)
-			return grid[m - 1][n - 1];
+	private int dfs(int[][] grid, int m, int n) {
+		if (m == 0 && n == 0)
+			return grid[0][0];
 
-		if (m == 1)
-			return grid[m - 1][n - 1] + helper(grid, m, n - 1);
-		else if (n == 1)
-			return grid[m - 1][n - 1] + helper(grid, m - 1, n);
+		if (m == 0)
+			return grid[0][n] + dfs(grid, 0, n - 1);
+		else if (n == 0)
+			return grid[m][0] + dfs(grid, m - 1, 0);
 		else
-			return grid[m - 1][n - 1] + Math.min(helper(grid, m, n - 1), helper(grid, m - 1, n));
+			return grid[m][n] + Math.min(dfs(grid, m, n - 1), dfs(grid, m - 1, n));
 	}
 
 	public int minPathSum(int[][] grid) {
@@ -55,7 +55,7 @@ class SolutionA {
 
 		int m = grid.length;
 		int n = grid[0].length;
-		return helper(grid, m, n);
+		return dfs(grid, m - 1, n - 1);
 	}
 }
 
@@ -69,18 +69,18 @@ class SolutionA {
 class SolutionB {
 	private int[][] dp;
 
-	private int helper(int[][] grid, int m, int n) {
-		if (m == 1 && n == 1)
-			return grid[m - 1][n - 1];
+	private int dfs(int[][] grid, int m, int n) {
+		if (m == 0 && n == 0)
+			return grid[0][0];
 		if (dp[m][n] != 0)
 			return dp[m][n];
 
-		if (m == 1)
-			dp[m][n] = grid[m - 1][n - 1] + helper(grid, m, n - 1);
-		else if (n == 1)
-			dp[m][n] = grid[m - 1][n - 1] + helper(grid, m - 1, n);
+		if (m == 0)
+			dp[m][n] = grid[m][n] + dfs(grid, 0, n - 1);
+		else if (n == 0)
+			dp[m][n] = grid[m][n] + dfs(grid, m - 1, 0);
 		else
-			dp[m][n] = grid[m - 1][n - 1] + Math.min(helper(grid, m, n - 1), helper(grid, m - 1, n));
+			dp[m][n] = grid[m][n] + Math.min(dfs(grid, m, n - 1), dfs(grid, m - 1, n));
 		return dp[m][n];
 	}
 
@@ -90,8 +90,8 @@ class SolutionB {
 
 		int m = grid.length;
 		int n = grid[0].length;
-		dp = new int[m + 1][n + 1];
-		return helper(grid, m, n);
+		dp = new int[m][n];
+		return dfs(grid, m - 1, n - 1);
 	}
 }
 
@@ -111,14 +111,12 @@ class SolutionC {
 		int n = grid[0].length;
 		int[][] dp = new int[m][n];
 		dp[0][0] = grid[0][0];
-		for (int j = 1; j < n; j++) {
+		for (int j = 1; j < n; j++)
 			dp[0][j] = dp[0][j - 1] + grid[0][j];
-		}
 		for (int i = 1; i < m; i++) {
 			dp[i][0] = dp[i - 1][0] + grid[i][0];
-			for (int j = 1; j < n; j++) {
+			for (int j = 1; j < n; j++)
 				dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
-			}
 		}
 		return dp[m - 1][n - 1];
 	}
@@ -126,7 +124,7 @@ class SolutionC {
 
 /**
  * @ClassName      SolutionD
- * @Description    二维动态规划，滚动数组优化空间复杂度
+ * @Description    二维动态规划，优化空间复杂度
  * @author         moonspirit
  * @date           2019年3月5日 上午1:31:40
  * @version        1.0.0
@@ -140,14 +138,12 @@ class SolutionD {
 		int n = grid[0].length;
 		int[] dp = new int[n];
 		dp[0] = grid[0][0];
-		for (int j = 1; j < n; j++) {
+		for (int j = 1; j < n; j++)
 			dp[j] = dp[j - 1] + grid[0][j];
-		}
 		for (int i = 1; i < m; i++) {
 			dp[0] = dp[0] + grid[i][0];
-			for (int j = 1; j < n; j++) {
+			for (int j = 1; j < n; j++)
 				dp[j] = Math.min(dp[j], dp[j - 1]) + grid[i][j];
-			}
 		}
 		return dp[n - 1];
 	}
