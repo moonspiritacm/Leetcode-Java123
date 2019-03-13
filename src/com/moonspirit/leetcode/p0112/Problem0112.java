@@ -45,10 +45,6 @@ class Solution {
 			return false;
 		if (root.val == sum && root.left == null && root.right == null)
 			return true;
-		if (hasPathSum(root.left, sum - root.val))
-			return true;
-		if (hasPathSum(root.right, sum - root.val))
-			return true;
-		return false;
+		return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
 	}
 }
