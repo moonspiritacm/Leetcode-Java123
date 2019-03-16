@@ -1,17 +1,17 @@
-package com.moonspirit.leetcode.p0139;
+package com.moonspirit.leetcode.p0139.round1;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * @ClassName      Problem0139
  * @Description    [Leetcode 0139](https://leetcode.com/problems/word-break/) 动态规划
  * @author         moonspirit
- * @date           2019年3月7日 上午10:32:35
+ * @date           2019年3月16日 下午9:44:47
  * @version        1.0.0
  */
 public class Problem0139 {
@@ -34,12 +34,50 @@ public class Problem0139 {
 
 /**
  * @ClassName      SolutionA
- * @Description    记忆化递归
+ * @Description    暴力搜索，超时
  * @author         moonspirit
- * @date           2019年3月7日 上午10:34:15
+ * @date           2019年3月16日 下午10:16:38
  * @version        1.0.0
  */
 class SolutionA {
+	public boolean wordBreak(String s, List<String> wordDict) {
+		if (s == null || s.length() == 0)
+			return true;
+
+		for (String word : wordDict)
+			if (s.startsWith(word) && wordBreak(s.substring(word.length()), wordDict))
+				return true;
+		return false;
+	}
+}
+
+/**
+ * @ClassName      SolutionB
+ * @Description    暴力搜索，超时
+ * @author         moonspirit
+ * @date           2019年3月16日 下午10:17:13
+ * @version        1.0.0
+ */
+class SolutionB {
+	public boolean wordBreak(String s, List<String> wordDict) {
+		if (s == null || s.length() == 0)
+			return true;
+
+		for (String word : wordDict)
+			if (s.endsWith(word) && wordBreak(s.substring(0, s.length() - word.length()), wordDict))
+				return true;
+		return false;
+	}
+}
+
+/**
+ * @ClassName      SolutionC
+ * @Description    记忆化递归
+ * @author         moonspirit
+ * @date           2019年3月16日 下午10:26:15
+ * @version        1.0.0
+ */
+class SolutionC {
 	private int[] dp;
 
 	private boolean helper(String s, Set<String> dict) {
@@ -76,24 +114,25 @@ class SolutionA {
 }
 
 /**
- * @ClassName      SolutionB
+ * @ClassName      SolutionD
  * @Description    动态规划
  * @author         moonspirit
- * @date           2019年3月7日 上午10:55:05
+ * @date           2019年3月16日 下午10:26:28
  * @version        1.0.0
  */
-class SolutionB {
+class SolutionD {
 	public boolean wordBreak(String s, List<String> wordDict) {
 		if (s == null || s.length() == 0)
 			return true;
 
-		boolean[] dp = new boolean[s.length() + 1];
 		Set<String> dict = new HashSet<>();
 		for (String word : wordDict)
 			dict.add(word);
 
+		int n = s.length();
+		boolean[] dp = new boolean[n + 1];
 		dp[0] = true;
-		for (int i = 1; i < s.length() + 1; i++) {
+		for (int i = 1; i <= n; i++) {
 			for (int j = 0; j < i; j++) {
 				if (dp[j] && dict.contains(s.substring(j, i))) {
 					dp[i] = true;
@@ -101,6 +140,6 @@ class SolutionB {
 				}
 			}
 		}
-		return dp[s.length()];
+		return dp[n];
 	}
 }
