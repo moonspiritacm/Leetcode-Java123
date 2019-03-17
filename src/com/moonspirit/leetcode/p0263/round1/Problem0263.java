@@ -1,4 +1,4 @@
-package com.moonspirit.leetcode.p0263;
+package com.moonspirit.leetcode.p0263.round1;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * @ClassName      Problem0263
- * @Description    [Leetcode 0263](https://leetcode.com/problems/ugly-number/) 丑数
+ * @Description    [Leetcode 0263](https://leetcode.com/problems/ugly-number/) 判断丑数
  * @author         moonspirit
  * @date           2019年3月11日 下午5:28:23
  * @version        1.0.0
@@ -31,15 +31,15 @@ public class Problem0263 {
 
 class Solution {
 	public boolean isUgly(int num) {
-		if (num <= 0)
+		if (num < 1)
 			return false;
 
 		while (num % 2 == 0)
-			num = num / 2;
+			num /= 2;
 		while (num % 3 == 0)
-			num = num / 3;
+			num /= 3;
 		while (num % 5 == 0)
-			num = num / 5;
+			num /= 5;
 		if (num == 1)
 			return true;
 		else
