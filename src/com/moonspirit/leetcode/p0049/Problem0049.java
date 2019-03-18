@@ -69,13 +69,13 @@ class SolutionA {
 }
 
 /**
- * @ClassName      Solution
+ * @ClassName      SolutionB
  * @Description    由于只包含小写字母，字符串逐字符计数后分组
  * @author         moonspirit
  * @date           2019年3月18日 下午3:40:58
  * @version        1.0.0
  */
-class Solution {
+class SolutionB {
 	public List<List<String>> groupAnagrams(String[] strs) {
 		List<List<String>> res = new ArrayList<>();
 		if (strs == null || strs.length == 0)
