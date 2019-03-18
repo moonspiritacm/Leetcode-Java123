@@ -1,4 +1,4 @@
-package com.moonspirit.leetcode.p0264;
+package com.moonspirit.leetcode.p0264.round1;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * @ClassName      Problem0264
- * @Description    [Leetcode 0264](https://leetcode.com/problems/ugly-number-ii/) 丑数 动态规划
+ * @Description    [Leetcode 0264](https://leetcode.com/problems/ugly-number-ii/) 计算第N个丑数 动态规划
  * @author         moonspirit
  * @date           2019年3月11日 下午5:40:49
  * @version        1.0.0
@@ -38,15 +38,15 @@ public class Problem0264 {
  */
 class SolutionA {
 	private boolean isUgly(int num) {
-		if (num <= 0)
+		if (num < 1)
 			return false;
 
 		while (num % 2 == 0)
-			num = num / 2;
+			num /= 2;
 		while (num % 3 == 0)
-			num = num / 3;
+			num /= 3;
 		while (num % 5 == 0)
-			num = num / 5;
+			num /= 5;
 		if (num == 1)
 			return true;
 		else
@@ -54,8 +54,8 @@ class SolutionA {
 	}
 
 	public int nthUglyNumber(int n) {
-		if (n <= 0)
-			return 0;
+		if (n <= 1)
+			return 1;
 
 		int num = 0;
 		while (n > 0) {
@@ -65,6 +65,13 @@ class SolutionA {
 		}
 		return num;
 	}
+
+	/*
+	 * public int nthUglyNumber(int n) { if (n <= 1) return 1;
+	 * 
+	 * int num = 1; int count = 0; while (count < n) { if (isUgly(num)) count++;
+	 * num++; } return num - 1; }
+	 */
 }
 
 /**
