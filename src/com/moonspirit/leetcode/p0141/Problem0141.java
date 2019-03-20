@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * @ClassName      Problem0141
- * @Description    [Leetcode 0141](https://leetcode.com/problems/linked-list-cycle/) 快慢指针
+ * @Description    [Leetcode 0141](https://leetcode.com/problems/linked-list-cycle/) 链表成环问题 快慢指针
  * @author         moonspirit
  * @date           2019年3月19日 下午10:50:31
  * @version        1.0.0
